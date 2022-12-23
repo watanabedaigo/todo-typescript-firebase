@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = React.memo(
     return (
       <div>
         {isRouter === true ? (
-          <Link to={'/'} onClick={callback}>
+          <Link to={'/top'} onClick={callback}>
             {label}
           </Link>
         ) : (

@@ -22,7 +22,7 @@ const TodoTemplate: React.FC = () => {
   return (
     <div>
       <p>
-        <Link to={'create'}>追加</Link>
+        <Link to={'/create'}>追加</Link>
       </p>
       <Search
         inputSearchRef={inputSearchRef}
@@ -36,6 +36,9 @@ const TodoTemplate: React.FC = () => {
         updateDone={updateDone}
         removeTodo={removeTodo}
       />
+      <p>
+        <Link to={'/'}>ログインページ</Link>
+      </p>
     </div>
   );
 };

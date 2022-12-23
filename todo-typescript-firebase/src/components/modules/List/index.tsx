@@ -28,9 +28,9 @@ const List: React.FC<ListProps> = React.memo(
               return (
                 <li key={todo.id} id={todo.id}>
                   <p>{todo.content}</p>
-                  <Link to={`detail/${todo.id}`}>詳細</Link>
+                  <Link to={`/detail/${todo.id}`}>詳細</Link>
                   <Link
-                    to={`edit/${todo.id}`}
+                    to={`/edit/${todo.id}`}
                     data-testid={
                       todo.id === '01GMQCGWP9AQQG1X1HRCJ7JE3H' &&
                       'updateContent-test'
@@ -55,9 +55,9 @@ const List: React.FC<ListProps> = React.memo(
               return (
                 <li key={todo.id} id={todo.id}>
                   <p>{todo.content}</p>
-                  <Link to={`detail/${todo.id}`}>詳細</Link>
+                  <Link to={`/detail/${todo.id}`}>詳細</Link>
                   <Link
-                    to={`edit/${todo.id}`}
+                    to={`/edit/${todo.id}`}
                     data-testid={
                       todo.id === '01GMQCGWP9AQQG1X1HRCJ7JE3H' &&
                       'updateContent-test'

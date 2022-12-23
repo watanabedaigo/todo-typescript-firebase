@@ -24,6 +24,7 @@ const Search: React.FC<SearchProps> = React.memo(
           placeholder="todoを検索"
           inputSearchRef={inputSearchRef}
           getInputValue={getInputValue}
+          type="text"
         />
         <Button label="検索" callback={searchTodo} isRouter={false} />
         <Button label="条件クリア" callback={resetTodo} isRouter={false} />

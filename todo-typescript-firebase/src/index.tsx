@@ -5,6 +5,7 @@ import TodoPage from 'pages/TodoPage';
 import CreatePage from 'pages/CreatePage';
 import EditPage from 'pages/EditPage';
 import DetailPage from 'pages/DetailPage';
+import SignUpPage from 'pages/SignUpPage';
 import { ErrorPage } from 'pages/Error';
 
 const root = ReactDOM.createRoot(
@@ -16,6 +17,11 @@ console.log('root レンダリング');
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <SignUpPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: 'top',
     element: <TodoPage />,
     errorElement: <ErrorPage />,
   },

@@ -27,9 +27,10 @@ const Add: React.FC<AddProps> = React.memo(
           inputRef={inputRef}
           initValue={initValue}
           getInputValue={getInputValue}
+          type="text"
         />
         <Button label={label} callback={callback} isRouter={true} />
-        <Link to={'/'}>トップ</Link>
+        <Link to={'/top'}>トップ</Link>
       </div>
     );
   }
