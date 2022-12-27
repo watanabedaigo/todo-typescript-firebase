@@ -10,11 +10,10 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 // SignUpの型
 type SignUpProps = {
   label: string;
-  getInputValue: (event: EventType) => void;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
-const SignUp: React.FC<SignUpProps> = React.memo(({ label, getInputValue }) => {
+const SignUp: React.FC<SignUpProps> = React.memo(({ label }) => {
   console.log('SignUp レンダリング');
 
   const signUp = (event: EventType) => {

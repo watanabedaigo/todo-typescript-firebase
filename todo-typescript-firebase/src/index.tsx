@@ -7,6 +7,7 @@ import EditPage from 'pages/EditPage';
 import DetailPage from 'pages/DetailPage';
 import SignUpPage from 'pages/SignUpPage';
 import { ErrorPage } from 'pages/Error';
+import { AuthProvider } from 'contexts/AuthContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -44,6 +45,8 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
