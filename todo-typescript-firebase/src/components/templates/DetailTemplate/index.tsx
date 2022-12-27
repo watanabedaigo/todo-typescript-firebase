@@ -18,7 +18,7 @@ const DetailTemplate: React.FC = () => {
       <div>
         <p>{targetJson.content}</p>
         <p>
-          <Link to={'/top'}>to TodoPage</Link>
+          <Link to={'/'}>to TodoPage</Link>
         </p>
       </div>
     );

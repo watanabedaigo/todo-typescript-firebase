@@ -4,22 +4,22 @@ import styles from './styles.module.scss';
 import Button from 'components/atoms/Button';
 import InputForm from 'components/atoms/InputForm';
 import { auth } from 'auth/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 // 型エイリアス
-// SignUpの型
-type SignUpProps = {
+// SignInの型
+type SignInProps = {
   label: string;
 };
 
 // メモ化して。親コンポーネントレンダリングによる再レンダリング防止
-const SignUp: React.FC<SignUpProps> = React.memo(({ label }) => {
-  console.log('SignUp レンダリング');
+const SignIn: React.FC<SignInProps> = React.memo(({ label }) => {
+  console.log('SignIn レンダリング');
 
   const navigate = useNavigate();
 
-  const authSignUp = (event: EventType) => {
+  const authSignIn = (event: EventType) => {
     event.preventDefault();
 
     // フォームを取得
@@ -37,10 +37,11 @@ const SignUp: React.FC<SignUpProps> = React.memo(({ label }) => {
     ) as HTMLInputElement;
     const passwordValue = passwordForm.value;
 
-    // ユーザー登録
-    createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+    // ログイン
+    signInWithEmailAndPassword(auth, emailValue, passwordValue)
       .then(() => {
-        navigate('/signin');
+        console.log({ auth, emailValue, passwordValue });
+        navigate('/');
       })
       .catch((error) => {
         console.log(error.code);
@@ -50,7 +51,7 @@ const SignUp: React.FC<SignUpProps> = React.memo(({ label }) => {
 
   return (
     <div>
-      <form onSubmit={authSignUp}>
+      <form onSubmit={authSignIn}>
         <div>
           <label>
             <span>メールアドレス</span>
@@ -71,4 +72,4 @@ const SignUp: React.FC<SignUpProps> = React.memo(({ label }) => {
   );
 });
 
-export default SignUp;
+export default SignIn;

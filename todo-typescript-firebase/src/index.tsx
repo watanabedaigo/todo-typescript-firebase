@@ -6,6 +6,8 @@ import CreatePage from 'pages/CreatePage';
 import EditPage from 'pages/EditPage';
 import DetailPage from 'pages/DetailPage';
 import SignUpPage from 'pages/SignUpPage';
+import SignInPage from 'pages/SignInPage';
+import PrivateRoute from 'routers/AuthProvider';
 import { ErrorPage } from 'pages/Error';
 import { AuthProvider } from 'contexts/AuthContext';
 
@@ -17,12 +19,17 @@ console.log('root レンダリング');
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: 'signin',
+    element: <SignInPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: 'signup',
     element: <SignUpPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: 'top',
+    path: '/',
     element: <TodoPage />,
     errorElement: <ErrorPage />,
   },

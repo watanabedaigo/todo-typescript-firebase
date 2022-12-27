@@ -30,7 +30,7 @@ const Add: React.FC<AddProps> = React.memo(
           type="text"
         />
         <Button label={label} callback={callback} isRouter={true} />
-        <Link to={'/top'}>トップ</Link>
+        <Link to={'/'}>トップ</Link>
       </div>
     );
   }

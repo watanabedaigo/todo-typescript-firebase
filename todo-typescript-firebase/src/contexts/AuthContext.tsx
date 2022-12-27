@@ -9,12 +9,16 @@ import type { User } from '@firebase/auth';
 import { auth } from 'auth/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 
+// 型エイリアス
+// AuthProviderPropsの型
 type AuthProviderProps = {
   children: ReactNode;
 };
 
+// 型エイリアス
+// AuthStateの型
 export type AuthState = {
-  // 認証されている | 認証されていない | 初期状態
+  // 認証済み | 認証されていない | 初期状態・完了していない状態
   user: User | null | undefined;
 };
 
@@ -22,26 +26,34 @@ const initialState: AuthState = {
   user: undefined,
 };
 
-const AuthContext = createContext<AuthState>(initialState);
+// contextオブジェクト作成
+const AuthContext = createContext<any>(undefined);
 
+// useContext(contextオブジェクト)を使用し、グローバルstateを取得する関数を定義
 export const useAuthContext = () => {
   return useContext(AuthContext);
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
+  console.log('AuthProvider レンダリング');
+
   const { children } = props;
 
-  const [user, setUser] = useState<AuthState>(initialState);
+  // state
+  const [user, setUser] = useState<any>(undefined);
 
-  const value = user;
+  // グローバルで扱うデータを指定
+  const value = {
+    user,
+  };
 
+  // useEffect
   useEffect(() => {
-    const unsubscribed = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({
-          user,
-        });
-      }
+    const unsubscribed = onAuthStateChanged(auth, (loginUser) => {
+      console.log(
+        '--------------------------------------------- useEffect --------------------------------------------------'
+      );
+      setUser(loginUser);
     });
     return () => {
       unsubscribed();

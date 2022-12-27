@@ -11,7 +11,7 @@ const SignUpTemplate: React.FC = () => {
     <div>
       <p>SignUpTemplate</p>
       <SignUp label="登録" />
-      <Link to={'/top'}>トップ</Link>
+      <Link to={'/signin'}>戻る</Link>
     </div>
   );
 };
