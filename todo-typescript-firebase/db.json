@@ -1,22 +1,3 @@
 {
-  "todos": [
-    {
-      "id": "01GNC4QRGEWRTJR1S33JE78KM2",
-      "content": "yyy@yyy.com1",
-      "done": false,
-      "userId": "0lZVxatWiqTTf1gzq3AZ4lKoYZ12"
-    },
-    {
-      "id": "01GNC4R15Q37R0H1RDX3PM5NK1",
-      "content": "yyy@yyy.com2",
-      "done": false,
-      "userId": "0lZVxatWiqTTf1gzq3AZ4lKoYZ12"
-    },
-    {
-      "id": "01GNC4S2JRZHQQGBWKP5TJWR08",
-      "content": "aaa@aaa.com1",
-      "done": false,
-      "userId": "grDGtsGY7VYg6wnwIccTvsjKVEq1"
-    }
-  ]
+  "todos": []
 }

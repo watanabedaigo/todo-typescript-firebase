@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { EventType } from 'types/EventType';
 import styles from './styles.module.scss';
 import Button from 'components/atoms/Button';
