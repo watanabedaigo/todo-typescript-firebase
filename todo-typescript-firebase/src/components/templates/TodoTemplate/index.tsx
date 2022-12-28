@@ -41,41 +41,29 @@ const TodoTemplate: React.FC = React.memo(() => {
   // contextで管理するuserを取得
   const { user } = useAuthContext();
 
-  if (user === undefined) {
-    console.log('undefined、ローディング');
-    // undefinedの場合はloading表示
-    return <p>loading...</p>;
-  } else if (user === null) {
-    console.log('null、リダイレクト');
-    // nullの場合はsigninにリダイレクト
-    return <Navigate to="/signin" />;
-  } else {
-    console.log('ログイン完了');
-    // userに値がある場合はtodo表示
-    return (
+  return (
+    <div>
+      <p>{user && user.email}</p>
+      <p>
+        <Link to={'/create'}>追加</Link>
+      </p>
+      <Search
+        inputSearchRef={inputSearchRef}
+        searchTodo={searchTodo}
+        resetTodo={resetTodo}
+        getInputValue={getInputValue}
+      />
+      <List
+        notDoneTodos={notDoneTodos}
+        doneTodos={doneTodos}
+        updateDone={updateDone}
+        removeTodo={removeTodo}
+      />
       <div>
-        <p>{user.email}</p>
-        <p>
-          <Link to={'/create'}>追加</Link>
-        </p>
-        <Search
-          inputSearchRef={inputSearchRef}
-          searchTodo={searchTodo}
-          resetTodo={resetTodo}
-          getInputValue={getInputValue}
-        />
-        <List
-          notDoneTodos={notDoneTodos}
-          doneTodos={doneTodos}
-          updateDone={updateDone}
-          removeTodo={removeTodo}
-        />
-        <div>
-          <Button label="ログアウト" callback={authSignOut} isRouter={false} />
-        </div>
+        <Button label="ログアウト" callback={authSignOut} isRouter={false} />
       </div>
-    );
-  }
+    </div>
+  );
 });
 
 export default TodoTemplate;

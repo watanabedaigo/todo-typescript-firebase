@@ -9,6 +9,7 @@ import SignUpPage from 'pages/SignUpPage';
 import SignInPage from 'pages/SignInPage';
 import { ErrorPage } from 'pages/Error';
 import { AuthProvider } from 'contexts/AuthContext';
+import PrivateRoute from 'routers/AuthProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -29,22 +30,38 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <TodoPage />,
+    element: (
+      <PrivateRoute>
+        <TodoPage />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: 'create',
-    element: <CreatePage />,
+    element: (
+      <PrivateRoute>
+        <CreatePage />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: 'edit/:editId',
-    element: <EditPage />,
+    element: (
+      <PrivateRoute>
+        <EditPage />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: 'detail/:detailId',
-    element: <DetailPage />,
+    element: (
+      <PrivateRoute>
+        <DetailPage />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
   },
 ]);

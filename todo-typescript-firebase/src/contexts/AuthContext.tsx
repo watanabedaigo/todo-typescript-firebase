@@ -24,7 +24,7 @@ type AuthState = {
 
 // 初期値設定
 const initialState: AuthState = {
-  user: undefined,
+  user: null,
 };
 
 // contextオブジェクト作成
