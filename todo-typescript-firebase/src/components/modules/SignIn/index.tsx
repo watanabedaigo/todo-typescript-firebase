@@ -6,7 +6,6 @@ import InputForm from 'components/atoms/InputForm';
 import { auth } from 'auth/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from 'contexts/AuthContext';
 
 // 型エイリアス
 // SignInの型
@@ -18,6 +17,7 @@ type SignInProps = {
 const SignIn: React.FC<SignInProps> = React.memo(({ label }) => {
   console.log('SignIn レンダリング');
 
+  // ページ遷移のためにnagigate作成
   const navigate = useNavigate();
 
   const authSignIn = (event: EventType) => {
@@ -41,13 +41,11 @@ const SignIn: React.FC<SignInProps> = React.memo(({ label }) => {
     // ログイン
     signInWithEmailAndPassword(auth, emailValue, passwordValue)
       .then(() => {
-        console.log(
-          '----------------------------- signInWithEmailAndPassword -------------------------------------'
-        );
         // ログインしたことにより、AuthContext内のonAuthStateChangedが発火し、state(user)が更新される。
-        // stateが更新される前に'/'に遷移すると、stateがnull、つまりログインしていないと判断され、'/signin'へリダイレクトされてしまう。
+        // stateが更新される前に'/'に遷移すると、stateがnull、つまりログインしていないと判断され、todoTemplateから'/signin'へリダイレクトされてしまう。
         // そこで、setTimeoutで非同期にページ遷移を実行し、stateが更新されるのを待ってから'/'に遷移させる。
         setTimeout(() => {
+          // ページ遷移
           navigate('/');
         }, 1);
       })

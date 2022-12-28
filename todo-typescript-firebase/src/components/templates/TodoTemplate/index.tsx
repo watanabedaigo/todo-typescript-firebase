@@ -24,6 +24,7 @@ const TodoTemplate: React.FC = React.memo(() => {
     resetTodo,
   } = useTodo();
 
+  // ページ遷移のためにnagigate作成
   const navigate = useNavigate();
 
   const authSignOut = async () => {
@@ -37,10 +38,8 @@ const TodoTemplate: React.FC = React.memo(() => {
     navigate('/signin');
   };
 
+  // contextで管理するuserを取得
   const { user } = useAuthContext();
-  console.log('---------------------------------------------');
-  console.log(user);
-  console.log('---------------------------------------------');
 
   if (user === undefined) {
     console.log('undefined、ローディング');
@@ -55,6 +54,7 @@ const TodoTemplate: React.FC = React.memo(() => {
     // userに値がある場合はtodo表示
     return (
       <div>
+        <p>{user.email}</p>
         <p>
           <Link to={'/create'}>追加</Link>
         </p>

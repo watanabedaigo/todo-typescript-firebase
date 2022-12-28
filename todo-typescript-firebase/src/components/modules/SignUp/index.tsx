@@ -17,6 +17,7 @@ type SignUpProps = {
 const SignUp: React.FC<SignUpProps> = React.memo(({ label }) => {
   console.log('SignUp レンダリング');
 
+  // ページ遷移のためにnagigate作成
   const navigate = useNavigate();
 
   const authSignUp = (event: EventType) => {
@@ -40,7 +41,12 @@ const SignUp: React.FC<SignUpProps> = React.memo(({ label }) => {
     // ユーザー登録
     createUserWithEmailAndPassword(auth, emailValue, passwordValue)
       .then(() => {
-        navigate('/signin');
+        // ログインしたことにより、AuthContext内のonAuthStateChangedが発火し、state(user)が更新される。
+        // stateが更新される前に'/'に遷移すると、stateがnull、つまりログインしていないと判断され、todoTemplateから'/signin'へリダイレクトされてしまう。
+        // そこで、setTimeoutで非同期にページ遷移を実行し、stateが更新されるのを待ってから'/'に遷移させる。
+        setTimeout(() => {
+          navigate('/');
+        }, 1);
       })
       .catch((error) => {
         console.log(error.code);

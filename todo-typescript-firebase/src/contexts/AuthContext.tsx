@@ -17,11 +17,12 @@ type AuthProviderProps = {
 
 // 型エイリアス
 // AuthStateの型
-export type AuthState = {
+type AuthState = {
   // 認証済み | 認証されていない | 初期状態・完了していない状態
   user: User | null | undefined;
 };
 
+// 初期値設定
 const initialState: AuthState = {
   user: undefined,
 };
@@ -41,24 +42,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
 
   // state
   const [user, setUser] = useState<AuthState>(initialState);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  // グローバルで扱うデータを指定
-  const value = {
-    user,
-  };
 
   // useEffect
   useEffect(() => {
-    console.log(
-      '----------------------------- useEffect -------------------------------------'
-    );
     try {
+      // ログイン状態の変化がトリガーとなるonAuthStateChangedを設定
       return onAuthStateChanged(auth, (user) => {
+        // state更新
         setUser({
           user,
         });
-        console.log(user);
       });
     } catch (error) {
       setUser(initialState);
@@ -66,29 +59,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const unsubscribed = onAuthStateChanged(auth, (user) => {
-  //     console.log(
-  //       '----------------------------- useEffect -------------------------------------'
-  //     );
-  //     console.log(user);
-  //     setUser({ user });
-  //     setLoading(false);
-  //   });
-  //   return () => {
-  //     unsubscribed();
-  //   };
-  // }, []);
-
+  // providerのvalue属性でuserを指定することで、子コンポーネントがuserにアクセできる（グローバルに管理）
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
-
-  // if (loading) {
-  //   return <p>loading...</p>;
-  // } else {
-  //   return (
-  //     <AuthContext.Provider value={user}>
-  //       {!loading && children}
-  //     </AuthContext.Provider>
-  //   );
-  // }
 };
