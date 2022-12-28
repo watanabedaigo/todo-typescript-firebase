@@ -3,7 +3,6 @@ import styles from './styles.module.scss';
 import Button from 'components/atoms/Button';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from 'contexts/AuthContext';
-
 import { auth } from 'auth/firebase';
 import { signOut } from 'firebase/auth';
 
@@ -31,6 +30,7 @@ const Header: React.FC = React.memo(() => {
   return (
     <header>
       <p>{user ? user.email : 'ログイン前'}</p>
+      {user && <p>{user.uid}</p>}
       {user && (
         <Button label="ログアウト" callback={authSignOut} isRouter={false} />
       )}

@@ -3,6 +3,8 @@ import * as apis from 'apis/todos';
 import { ulid } from 'ulid';
 import { TodoType } from 'types/TodoType';
 import { EventType } from 'types/EventType';
+import type { User } from '@firebase/auth';
+import { useAuthContext } from 'contexts/AuthContext';
 
 export const useTodo = () => {
   // hooks
@@ -28,6 +30,9 @@ export const useTodo = () => {
       unmounted = true;
     };
   }, []);
+
+  // useContext
+  const { user } = useAuthContext();
 
   // useRef
   // 追加用のinput
@@ -56,28 +61,31 @@ export const useTodo = () => {
 
   // POST
   const addTodo = () => {
-    // 追加データをオブジェクトで作成
-    const newTodo: TodoType = {
-      id: ulid(),
-      content: inputValue,
-      done: false,
-    };
+    if (user) {
+      // 追加データをオブジェクトで作成
+      const newTodo: TodoType = {
+        id: ulid(),
+        content: inputValue,
+        done: false,
+        userId: user.uid,
+      };
 
-    // jsonに追加
-    apis
-      .postTodo(newTodo)
-      .then((newTodo) => {
-        // State更新
-        setAllTodos([...allTodos, newTodo]);
-        setNotDoneTodos([...notDoneTodos, newTodo]);
+      // jsonに追加
+      apis
+        .postTodo(newTodo)
+        .then((newTodo) => {
+          // State更新
+          setAllTodos([...allTodos, newTodo]);
+          setNotDoneTodos([...notDoneTodos, newTodo]);
 
-        // input初期化
-        setInputValue('');
-        inputRef.current.value = '';
-      })
-      .catch((Error) => {
-        console.error(Error);
-      });
+          // input初期化
+          setInputValue('');
+          inputRef.current.value = '';
+        })
+        .catch((Error) => {
+          console.error(Error);
+        });
+    }
   };
 
   // PUT（doneプロパティ）
@@ -182,8 +190,13 @@ export const useTodo = () => {
 
   // 未完了または完了のみを、引数で渡したtodoの配列から抽出し、Stateを更新
   const filterTodo = (data: TodoType[]) => {
+    // ログインしたユーザーのtodoのみ抽出
+    const loginUserTodos = data.filter((todo) => {
+      return todo.userId === user?.uid;
+    });
+
     // 未完了のみ抽出
-    const notDoneTodos = data.filter((todo) => {
+    const notDoneTodos = loginUserTodos.filter((todo) => {
       return todo.done === false;
     });
 
@@ -191,7 +204,7 @@ export const useTodo = () => {
     setNotDoneTodos([...notDoneTodos]);
 
     // 完了のみ抽出
-    const doneTodos = data.filter((todo) => {
+    const doneTodos = loginUserTodos.filter((todo) => {
       return todo.done === true;
     });
 

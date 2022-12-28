@@ -53,7 +53,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
         setUser({
           user,
         });
-        console.log('effect');
         setLoading(false);
       });
     } catch (error) {
