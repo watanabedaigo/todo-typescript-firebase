@@ -42,6 +42,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
 
   // state
   const [user, setUser] = useState<AuthState>(initialState);
+  const [loading, setLoading] = useState(true);
 
   // useEffect
   useEffect(() => {
@@ -52,6 +53,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
         setUser({
           user,
         });
+        console.log('effect');
+        setLoading(false);
       });
     } catch (error) {
       setUser(initialState);
@@ -60,5 +63,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
   }, []);
 
   // providerのvalue属性でuserを指定することで、子コンポーネントがuserにアクセできる（グローバルに管理）
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={user}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };

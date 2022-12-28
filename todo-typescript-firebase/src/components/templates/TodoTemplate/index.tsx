@@ -3,11 +3,6 @@ import { useTodo } from 'hooks/useTodo';
 import { Link } from 'react-router-dom';
 import Search from 'components/modules/Search';
 import List from 'components/modules/List';
-import Button from 'components/atoms/Button';
-import { auth } from 'auth/firebase';
-import { signOut } from 'firebase/auth';
-import { useNavigate, Navigate } from 'react-router-dom';
-import { useAuthContext } from 'contexts/AuthContext';
 
 const TodoTemplate: React.FC = React.memo(() => {
   console.log('TodoTemplate レンダリング');
@@ -24,26 +19,8 @@ const TodoTemplate: React.FC = React.memo(() => {
     resetTodo,
   } = useTodo();
 
-  // ページ遷移のためにnagigate作成
-  const navigate = useNavigate();
-
-  const authSignOut = async () => {
-    console.log('ログアウト');
-
-    // ログアウト
-    await signOut(auth);
-    console.log(auth);
-
-    // ページ遷移
-    navigate('/signin');
-  };
-
-  // contextで管理するuserを取得
-  const { user } = useAuthContext();
-
   return (
     <div>
-      <p>{user && user.email}</p>
       <p>
         <Link to={'/create'}>追加</Link>
       </p>
@@ -59,9 +36,6 @@ const TodoTemplate: React.FC = React.memo(() => {
         updateDone={updateDone}
         removeTodo={removeTodo}
       />
-      <div>
-        <Button label="ログアウト" callback={authSignOut} isRouter={false} />
-      </div>
     </div>
   );
 });

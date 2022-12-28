@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import DetailTemplate from 'components/templates/DetailTemplate';
+import Header from 'components/modules/Header';
 
 const DetailPage: React.FC<{}> = () => {
   console.log('DetailPage レンダリング');
 
   return (
-    <div>
+    <>
+      <Header />
+      <p>DetailPage</p>
       <DetailTemplate />
-    </div>
+    </>
   );
 };
 

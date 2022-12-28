@@ -1,13 +1,16 @@
 import React from 'react';
 import SignUpTemplate from 'components/templates/SignUpTemplate';
+import Header from 'components/modules/Header';
 
 const SignUpPage: React.FC<{}> = () => {
   console.log('SignUpPage レンダリング');
 
   return (
-    <div>
+    <>
+      <Header />
+      <p>SignInPage</p>
       <SignUpTemplate />
-    </div>
+    </>
   );
 };
 

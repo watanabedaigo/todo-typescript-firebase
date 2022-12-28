@@ -9,7 +9,6 @@ const SignInTemplate: React.FC = () => {
 
   return (
     <div>
-      <p>SignInTemplate</p>
       <SignIn label="ログイン" />
       <Link to={'/signup'}>新規登録</Link>
     </div>

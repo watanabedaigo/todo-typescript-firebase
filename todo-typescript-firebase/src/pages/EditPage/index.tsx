@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import EditTemplate from 'components/templates/EditTemplate';
+import Header from 'components/modules/Header';
 
 const EditPage: React.FC<{}> = () => {
   console.log('EditPage レンダリング');
 
   return (
-    <div>
+    <>
+      <Header />
+      <p>EditPage</p>
       <EditTemplate />
-    </div>
+    </>
   );
 };
 
