@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import styles from './styles.module.scss';
 import { useTodo } from 'hooks/useTodo';
 import { Link } from 'react-router-dom';
 import Search from 'components/modules/Search';

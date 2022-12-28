@@ -3,7 +3,6 @@ import * as apis from 'apis/todos';
 import { ulid } from 'ulid';
 import { TodoType } from 'types/TodoType';
 import { EventType } from 'types/EventType';
-import type { User } from '@firebase/auth';
 import { useAuthContext } from 'contexts/AuthContext';
 
 export const useTodo = () => {

@@ -8,7 +8,7 @@ const SignUpPage: React.FC<{}> = () => {
   return (
     <>
       <Header />
-      <p>SignInPage</p>
+      <p>SignUpPage</p>
       <SignUpTemplate />
     </>
   );

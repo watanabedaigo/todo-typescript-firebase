@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTodo } from 'hooks/useTodo';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import SignUp from 'components/modules/SignUp';
