@@ -12,11 +12,6 @@ import { useAuthContext } from 'contexts/AuthContext';
 const TodoTemplate: React.FC = React.memo(() => {
   console.log('TodoTemplate レンダリング');
 
-  const { user } = useAuthContext();
-  console.log('---------------------------------------------');
-  console.log(user);
-  console.log('---------------------------------------------');
-
   // カスタムフックからロジックを受け取る
   const {
     notDoneTodos,
@@ -42,14 +37,19 @@ const TodoTemplate: React.FC = React.memo(() => {
     navigate('/signin');
   };
 
+  const { user } = useAuthContext();
+  console.log('---------------------------------------------');
+  console.log(user);
+  console.log('---------------------------------------------');
+
   if (user === undefined) {
     console.log('undefined、ローディング');
     // undefinedの場合はloading表示
-    return <p>loading</p>;
+    return <p>loading...</p>;
   } else if (user === null) {
     console.log('null、リダイレクト');
     // nullの場合はsigninにリダイレクト
-    return <Navigate to="signin" />;
+    return <Navigate to="/signin" />;
   } else {
     console.log('ログイン完了');
     // userに値がある場合はtodo表示

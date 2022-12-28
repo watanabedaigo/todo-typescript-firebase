@@ -27,7 +27,7 @@ const initialState: AuthState = {
 };
 
 // contextオブジェクト作成
-const AuthContext = createContext<any>(undefined);
+const AuthContext = createContext<AuthState>(initialState);
 
 // useContext(contextオブジェクト)を使用し、グローバルstateを取得する関数を定義
 export const useAuthContext = () => {
@@ -40,7 +40,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
   const { children } = props;
 
   // state
-  const [user, setUser] = useState<any>(undefined);
+  const [user, setUser] = useState<AuthState>(initialState);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // グローバルで扱うデータを指定
   const value = {
@@ -49,16 +50,45 @@ export const AuthProvider: React.FC<AuthProviderProps> = (props) => {
 
   // useEffect
   useEffect(() => {
-    const unsubscribed = onAuthStateChanged(auth, (loginUser) => {
-      console.log(
-        '--------------------------------------------- useEffect --------------------------------------------------'
-      );
-      setUser(loginUser);
-    });
-    return () => {
-      unsubscribed();
-    };
+    console.log(
+      '----------------------------- useEffect -------------------------------------'
+    );
+    try {
+      return onAuthStateChanged(auth, (user) => {
+        setUser({
+          user,
+        });
+        console.log(user);
+      });
+    } catch (error) {
+      setUser(initialState);
+      throw error;
+    }
   }, []);
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  // useEffect(() => {
+  //   const unsubscribed = onAuthStateChanged(auth, (user) => {
+  //     console.log(
+  //       '----------------------------- useEffect -------------------------------------'
+  //     );
+  //     console.log(user);
+  //     setUser({ user });
+  //     setLoading(false);
+  //   });
+  //   return () => {
+  //     unsubscribed();
+  //   };
+  // }, []);
+
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+
+  // if (loading) {
+  //   return <p>loading...</p>;
+  // } else {
+  //   return (
+  //     <AuthContext.Provider value={user}>
+  //       {!loading && children}
+  //     </AuthContext.Provider>
+  //   );
+  // }
 };

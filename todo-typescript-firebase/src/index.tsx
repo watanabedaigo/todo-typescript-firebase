@@ -7,7 +7,6 @@ import EditPage from 'pages/EditPage';
 import DetailPage from 'pages/DetailPage';
 import SignUpPage from 'pages/SignUpPage';
 import SignInPage from 'pages/SignInPage';
-import PrivateRoute from 'routers/AuthProvider';
 import { ErrorPage } from 'pages/Error';
 import { AuthProvider } from 'contexts/AuthContext';
 
